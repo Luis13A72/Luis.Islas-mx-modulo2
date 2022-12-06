@@ -15,6 +15,8 @@ class Dinosaur:
         self.image = DUCKING[0]
         self.dino_duck = False
 
+        self.duck_time = 0.5  
+
     def update(self, user_input):   #Siempre ddebe estar para cuando se agregue un objeto al juego
 
         if self.dino_run:
@@ -30,7 +32,8 @@ class Dinosaur:
             self.dino_run = False
             self.dino_duck = False
        
-        elif user_input[pygame.K_DOWN] and not self.dino_duck  and not self.dino_jump:
+        elif user_input[pygame.K_DOWN] and not self.dino_duck and not self.dino_jump:
+            
             self.dino_duck = True
             self.dino_run = False 
             self.dino_jump = False
@@ -61,14 +64,21 @@ class Dinosaur:
         self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1]  #Operación ternaria, operación que pone un If y un Else, en una sola linea
         self.dino_rect.x =80    #Dibujar donde se imprime el dinosaurio
         self.dino_rect.y =310   #Dibujar donde se imprime el dinosaurio
-        self.step_index += 1   #Los Step avanzaran de unoen uno hasta llegar  a 5        
+        self.step_index += 1   #Los Step avanzaran de uno en uno hasta llegar  a 5        
+        
 
-    def duck(self):
-            self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]  #Operación ternaria, operación que pone un If y un Else, en una sola linea
-            self.dino_rect.x =80    #Dibujar donde se imprime el dinosaurio
-            self.dino_rect.y =350   #Dibujar donde se imprime el dinosaurio
-            self.step_index += 1   #Los Step avanzaran de unoen uno hasta llegar  a 5 
-    
+    def duck(self):    
+
+        self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]  #Operación ternaria, operación que pone un If y un Else, en una sola linea
+        self.dino_rect.x =80    #Dibujar donde se imprime el dinosaurio
+        self.dino_rect.y =350   #Dibujar donde se imprime el dinosaurio
+        self.step_index += 1   #Los Step avanzaran de unoen uno hasta llegar  a 5 
+        self.duck_time -= 0.8
+        
+        if self.duck_time < -0.5:
+            self.dino_duck = False
+            self.duck_time = 0.5   
+
 
     def draw(self, screen):     #Siempre debe estar para cuando se agregue un objeto al juego, donde lo dibujara
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y)) # Se le pasa la imagen y la ubicación

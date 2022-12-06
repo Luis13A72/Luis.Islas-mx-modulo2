@@ -30,6 +30,9 @@ class Game:
             if event.type == pygame.QUIT:   #La funcion del tache para cerrar la ventana
                 self.playing = False        #Saca del juego
 
+            
+                
+                
     def update(self):
         user_input = pygame.key.get_pressed()    #Todos los que se han presionado
         self.player.update(user_input)    #/Llama al metodo que está en la clase de la instancia
