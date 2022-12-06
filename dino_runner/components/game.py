@@ -39,7 +39,7 @@ class Game:
         self.screen.fill((255, 255, 255))   #Color que se pintará la pantalla  
         self.draw_background()      #llama al metodo del fondo de pantalla
         self.player.draw(self.screen)          #/Pasa los datos del screen, para dibujar al dinosaur
-        pygame.display.update()     #Actualiza un objeto en praticular
+        pygame.display.update()     #Actualiza un objeto en particular
         pygame.display.flip()   #Actualiza todos los objetos
 
     def draw_background(self):
