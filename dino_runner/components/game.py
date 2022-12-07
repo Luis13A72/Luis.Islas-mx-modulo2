@@ -1,6 +1,7 @@
 import pygame
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 from dino_runner.components.dinosaur import Dinosaur #se importa nuestra clase
+from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 
 class Game:
     def __init__(self):
@@ -15,6 +16,8 @@ class Game:
         self.y_pos_bg = 380     #posición en Y
 
         self.player = Dinosaur() #/Es la instancia de la clase Dinosaur
+
+        self.obstacle_manager = ObstacleManager()
 
     def run(self):
         # Game loop: events - update - draw
@@ -37,13 +40,17 @@ class Game:
         user_input = pygame.key.get_pressed()    #Todos los que se han presionado
         self.player.update(user_input)    #/Llama al metodo que está en la clase de la instancia
 
+        self.obstacle_manager.update(self)
+
     def draw(self):
         self.clock.tick(FPS)        #El tick dice en cada segundo cuantos frames se actualizan
         self.screen.fill((255, 255, 255))   #Color que se pintará la pantalla  
         self.draw_background()      #llama al metodo del fondo de pantalla
         self.player.draw(self.screen)          #/Pasa los datos del screen, para dibujar al dinosaur
-        pygame.display.update()     #Actualiza un objeto en particular
+        self.obstacle_manager.draw(self.screen)
+        pygame.display.update()
         pygame.display.flip()   #Actualiza todos los objetos
+        
 
     def draw_background(self):
         image_width = BG.get_width()    #El ancho de la imagen del fondo
