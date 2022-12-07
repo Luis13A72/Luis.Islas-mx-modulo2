@@ -11,7 +11,7 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))    #Define el tamaño de la pantalla del juego
         self.clock = pygame.time.Clock()    #Define los tiempos del juego
         self.playing = False    
-        self.game_speed = 20    #20 posiciones que se irán cambiando
+        self.game_speed = 10    #20 posiciones que se irán cambiando
         self.x_pos_bg = 0       #pocision en X
         self.y_pos_bg = 380     #posición en Y
 
