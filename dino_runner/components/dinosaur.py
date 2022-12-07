@@ -2,7 +2,7 @@ import pygame
 from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING #Se importa la constante a usar
 class Dinosaur:
     def __init__(self): #Siempre ddebe estar para cuando se agregue un objeto al juego
-        self.image = RUNNING[0] #Al ser una lita inicia en posicion 0
+        self.image = RUNNING[0] #Al ser una lista inicia en posicion 0
         self.dino_rect = self.image.get_rect()   #Coordenadas que tendra nuestra imagen, dando todos su parametros
         self.dino_rect.x =80    #Dibujar donde se imprime el dinosaurio
         self.dino_rect.y =310   #Dibujar donde se imprime el dinosaurio
@@ -12,7 +12,7 @@ class Dinosaur:
         self.dino_jump = False   #//Se crean dos variables mas
         self.jump_vel = 8.5 #//Se creala variable de velocidad de salto
 
-        self.image = DUCKING[0]
+        self.image = DUCKING[0] #
         self.dino_duck = False
 
         self.duck_time = 0.5  
