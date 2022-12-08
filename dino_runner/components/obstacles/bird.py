@@ -8,7 +8,6 @@ class Bird(Obstacle):
         super().__init__(image, self.type) #super invoca al constructor del obbstaculo
         self.rect.y = random.randint(225,325)
  
-        
 
   
         

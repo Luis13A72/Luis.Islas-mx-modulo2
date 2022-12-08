@@ -7,14 +7,11 @@ class Dinosaur:
         self.dino_rect.x =80    #Dibujar donde se imprime el dinosaurio
         self.dino_rect.y =310   #Dibujar donde se imprime el dinosaurio
         self.step_index = 0    #Atributo de los pasos del dinosaurio
-
         self.dino_run = True     #//Se crean dos variables mas
         self.dino_jump = False   #//Se crean dos variables mas
         self.jump_vel = 8.5 #//Se creala variable de velocidad de salto
-
         self.image = DUCKING[0] #
         self.dino_duck = False
-
         self.duck_time = 0.5  
 
     def update(self, user_input):   #Siempre ddebe estar para cuando se agregue un objeto al juego

@@ -16,3 +16,5 @@ class Obstacle(Sprite):
 
     def draw(self, screen):     #Siempre recibe el screen, porque se necesita el "lienzo" donde dibujará  
         screen.blit(self.image[self.obstacle_type], (self.rect.x, self.rect.y)) #Recibe una imagen y la posición donde se colocará la imagen, lo pone pero no lo dibuja
+
+    
