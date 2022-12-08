@@ -11,7 +11,7 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))    #Define el tamaño de la pantalla del juego
         self.clock = pygame.time.Clock()    #Define los tiempos del juego
         self.playing = False    
-        self.game_speed = 7    #20 posiciones que se irán cambiando
+        self.game_speed = 13    #20 posiciones que se irán cambiando
         self.x_pos_bg = 0       #pocision en X
         self.y_pos_bg = 380     #posición en Y
         self.player = Dinosaur() #/Es la instancia de la clase Dinosaur
@@ -58,14 +58,15 @@ class Game:
 
         self.score += 1
         if self.score % 100 == 0:
-            self.game_speed += 0.5
-
+            self.game_speed += 1
 
     def draw(self):
         self.clock.tick(FPS)        #El tick dice en cada segundo cuantos frames se actualizan
         self.screen.fill((255, 255, 255))   #Color que se pintará la pantalla  
         self.draw_background()      #llama al metodo del fondo de pantalla
         self.draw_score()
+        self.draw_speed()
+        self.draw_death()
         self.player.draw(self.screen)          #/Pasa los datos del screen, para dibujar al dinosaur
         self.obstacle_manager.draw(self.screen)
         pygame.display.update()
@@ -83,19 +84,34 @@ class Game:
         self.x_pos_bg -= self.game_speed    #Disminuira a la velocidad que se le haya colocado
 
     def draw_score(self):
+        Game.resume(self, f'score: {self.score}', 1000, 50)
+
+    def draw_speed(self):
+        Game.resume(self, f'Speed: {self.game_speed-13}', 100, 50)
+    
+    def draw_death(self):
+        Game.resume(self, f'Number of deaths: {self.death_count}', 550, 50)
+
+    def resume(self, message, width, height):
         font = pygame.font.FontType(FONT_STYLE, 30)
-        text = font.render(f'score: {self.score}', True, (0,0,0))
+        text = font.render(message, True, (0,0,0))
         text_rect = text.get_rect()
-        text_rect.center = (1000, 50)
+        text_rect.center = (width, height)
         self.screen.blit(text, text_rect) 
 
-    def handle_events_on_menu(self):
+    def reset_status(self):
+        self.game_speed = 13 
+        self.score = 0
+
+    def handle_events_on_menu(self):            
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
                 self.playing = False
             elif event.type == pygame.KEYDOWN:
+                Game.reset_status(self)
                 self.run()
+                
 
              
     def show_menu(self):
@@ -104,14 +120,13 @@ class Game:
         half_screen_width = SCREEN_WIDTH //2
 
         if self.death_count == 0:
-            font = pygame.font.Font(FONT_STYLE, 30)
-            text = font.render('Press any key to start', True, (0, 0, 0))
-            text_rect = text.get_rect()
-            text_rect.center = (half_screen_width, half_screen_height)
-            self.screen.blit(text, text_rect)
+            Game.resume(self,'Press any key to start', half_screen_width, half_screen_height)
         else:
-            pass
-
+            
+            Game.resume(self, 'Try again' , half_screen_width, half_screen_height)
+            Game.resume(self, f'Number of deaths: {self.death_count}', half_screen_width+20, half_screen_height+100)
+            Game.resume(self, f'Speed: {self.game_speed-13}', half_screen_width+20, half_screen_height+150)
+            Game.resume(self, f'Score: {self.score}', half_screen_width+20, half_screen_height+200)
         self.screen.blit(ICON, (half_screen_width -20, half_screen_height - 140))
         pygame.display.update()
         self.handle_events_on_menu()
