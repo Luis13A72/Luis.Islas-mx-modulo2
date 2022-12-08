@@ -15,7 +15,6 @@ class Dinosaur:
         self.duck_time = 0.5  
 
     def update(self, user_input):   #Siempre ddebe estar para cuando se agregue un objeto al juego
-
         if self.dino_run:
             self.run()  #Si está en Run se manda a llamar al metodo run
         elif self.dino_jump:
@@ -23,14 +22,12 @@ class Dinosaur:
         elif self.dino_duck:
             self.duck()
         
-            
         if user_input[pygame.K_UP] and not self.dino_jump: #Entrada del usuario por medio de pygame para el comando arriba
             self.dino_jump = True
             self.dino_run = False
             self.dino_duck = False
        
-        elif user_input[pygame.K_DOWN] and not self.dino_duck and not self.dino_jump:
-            
+        elif user_input[pygame.K_DOWN] and not self.dino_duck and not self.dino_jump:    
             self.dino_duck = True
             self.dino_run = False 
             self.dino_jump = False
@@ -40,12 +37,8 @@ class Dinosaur:
             self.dino_duck = False
             self.dino_run = True
             
-            
         if self.step_index >= 10: #se debe resetear los steps para reiniciar la animación
             self.step_index = 0  
-
-        
-
 
     def jump(self):
         self.image = JUMPING    
@@ -63,9 +56,7 @@ class Dinosaur:
         self.dino_rect.y =310   #Dibujar donde se imprime el dinosaurio
         self.step_index += 1   #Los Step avanzaran de uno en uno hasta llegar  a 5        
         
-
     def duck(self):    
-
         self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]  #Operación ternaria, operación que pone un If y un Else, en una sola linea
         self.dino_rect.x =80    #Dibujar donde se imprime el dinosaurio
         self.dino_rect.y =350   #Dibujar donde se imprime el dinosaurio
@@ -75,7 +66,6 @@ class Dinosaur:
         if self.duck_time < -0.5:
             self.dino_duck = False
             self.duck_time = 0.5   
-
 
     def draw(self, screen):     #Siempre debe estar para cuando se agregue un objeto al juego, donde lo dibujara
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y)) # Se le pasa la imagen y la ubicación

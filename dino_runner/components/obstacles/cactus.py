@@ -2,7 +2,7 @@ import random
 from dino_runner.components.obstacles.obstacle import Obstacle
 from dino_runner.utils.constants import LARGE_CACTUS, SMALL_CACTUS
 
-class Cactus(Obstacle):
+class Cactus(Obstacle):         ###
     CACTUS = {
         'BIG' : (LARGE_CACTUS, 300),
         'SMALL' : (LARGE_CACTUS, 320),
