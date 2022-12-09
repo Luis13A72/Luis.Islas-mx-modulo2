@@ -7,7 +7,7 @@ RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
 
 class Dinosaur:
     X_POS = 80
-    Y_POS = 310
+    Y_POS = 300
     JUM_VEL = 8.5
     Y_POS_DUCK = 340
     def __init__(self):
